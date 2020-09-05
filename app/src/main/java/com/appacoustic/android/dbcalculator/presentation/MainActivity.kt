@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.inputmethod.InputMethodManager
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.appacoustic.android.dbcalculator.R
 import com.appacoustic.android.dbcalculator.framework.setOnTextChangedListener
@@ -29,6 +28,14 @@ class MainActivity : AppCompatActivity() {
         viewModel.sum.observe(this, { sum ->
             tvSumResult.text = sum?.toString() ?: "?"
         })
+
+        viewModel.input.observe(this, { input ->
+            etSources.setText(input)
+        })
+
+        viewModel.inputIndex.observe(this, { index ->
+            etSources.setSelection(index)
+        })
     }
 
     private fun initEditText() {
@@ -39,13 +46,14 @@ class MainActivity : AppCompatActivity() {
         }, 500)
 
         etSources.setOnTextChangedListener { input ->
-            viewModel.handleSourcesChanged(input)
+//            viewModel.handleSourcesChanged(input)
         }
     }
 
     private fun initFab() {
         fabAdd.setOnClickListener {
-            Toast.makeText(this, "FOO", Toast.LENGTH_SHORT).show()
+            val input = etSources.text.toString()
+            viewModel.handlePlusClicked(input)
         }
     }
 }
