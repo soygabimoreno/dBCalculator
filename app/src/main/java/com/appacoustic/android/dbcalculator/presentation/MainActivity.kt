@@ -46,7 +46,7 @@ class MainActivity : AppCompatActivity() {
         }, 500)
 
         etSources.setOnTextChangedListener { input ->
-//            viewModel.handleSourcesChanged(input)
+            viewModel.handleSourcesChanged(input.toString())
         }
     }
 

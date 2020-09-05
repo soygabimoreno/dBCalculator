@@ -2,6 +2,7 @@ package com.appacoustic.android.dbcalculator.presentation
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.appacoustic.android.dbcalculator.domain.CalculateDBSum
+import com.appacoustic.android.dbcalculator.domain.CommaRemover
 import io.mockk.mockk
 import org.junit.Assert.assertTrue
 import org.junit.Before
@@ -14,12 +15,14 @@ class MainViewModelTest {
     val instantTaskExecutorRule = InstantTaskExecutorRule()
 
     private val calculateDBSum = mockk<CalculateDBSum>()
+    private val commaRemover = mockk<CommaRemover>()
     private lateinit var viewModel: MainViewModel
 
     @Before
     fun setUp() {
         viewModel = MainViewModel(
-            calculateDBSum = calculateDBSum
+            calculateDBSum = calculateDBSum,
+            commaRemover = commaRemover
         )
     }
 

@@ -3,35 +3,36 @@ package com.appacoustic.android.dbcalculator.domain
 import arrow.core.Either
 import com.appacoustic.android.dbcalculator.framework.isFilled
 import kotlin.math.log10
+import kotlin.math.pow
 import kotlin.math.round
 
-class CalculateDBSum {
+class CalculateDBSum(
+    val commaRemover: CommaRemover
+) {
 
     object InputNotFilledException : Exception("InputNotFilledException")
 
-    operator fun invoke(input: CharSequence?): Either<Throwable, Float> {
+    operator fun invoke(input: String): Either<Throwable, Float> {
         return if (input.isFilled()) {
-            val rawResult = 20 * log10(input.toString().toDouble())
-            val formattedResult = (round(rawResult * 10) / 10).toFloat()
-            Either.right(formattedResult)
+            val inputFormatted = commaRemover(input)
+            if (inputFormatted.isFilled()) {
+                val sources = inputFormatted.toSources()
+                var linearSum = 0.0
+                sources.forEach { source ->
+                    linearSum += 10.0.pow(source / 10)
+                }
+                val rawSum = 10 * log10(linearSum)
+                val formattedSum = (round(rawSum * 10) / 10).toFloat()
+                Either.right(formattedSum)
+            } else {
+                Either.left(InputNotFilledException)
+            }
         } else {
             Either.left(InputNotFilledException)
         }
     }
-}
 
-/*
-    /**
-     * @param sources - Sound sources.
-     * @return the logarithmic sum of the input sources.
-     */
-    public static float addDB(float[] sources) {
-        float out = 0;
-        for (float source : sources) {
-            out += Math.pow(10, source / 10); // Linear sum
-        }
-        out = (float) (10 * Math.log10(out)); // Convert to dB
-        out = (float) (Math.rint(out * 10) / 10); // Round to 1 decimal
-        return out;
-    }
- */
+    private fun String.toSources(): List<Double> =
+        split(CommaRemover.DELIMITER)
+            .map { it.toDouble() }
+}

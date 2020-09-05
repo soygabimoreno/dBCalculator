@@ -4,10 +4,12 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.appacoustic.android.dbcalculator.domain.CalculateDBSum
+import com.appacoustic.android.dbcalculator.domain.CommaRemover
 import com.appacoustic.android.dbcalculator.framework.isFilled
 
 class MainViewModel(
-    private val calculateDBSum: CalculateDBSum
+    private val calculateDBSum: CalculateDBSum,
+    val commaRemover: CommaRemover
 ) : ViewModel() {
 
     private var _sum = MutableLiveData<Float>()
@@ -23,7 +25,7 @@ class MainViewModel(
         _sum.value = null
     }
 
-    fun handleSourcesChanged(input: CharSequence?) {
+    fun handleSourcesChanged(input: String) {
         calculateDBSum(input)
             .fold({
                 _sum.value = null
@@ -35,8 +37,9 @@ class MainViewModel(
     fun handlePlusClicked(input: String) {
         val inputTrimmed = input.trim()
         if (inputTrimmed.isFilled() && lastFilledCharacterIsNotAPlus(inputTrimmed)) {
-            _input.value = "$inputTrimmed + "
-            _inputIndex.value = inputTrimmed.length + 3
+            val inputFormatted = commaRemover(inputTrimmed)
+            _input.value = "$inputFormatted + "
+            _inputIndex.value = inputFormatted!!.length + 3
         }
     }
 
