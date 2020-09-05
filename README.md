@@ -1,2 +1,4 @@
 # dBCalculator
-It allows you to do sums logarithmic dB. Very useful for quickly adding noise sources anywhere.
+It allows you to do logarithmic sums in dB.
+
+Very useful for adding noise sources fast and anywhere.
