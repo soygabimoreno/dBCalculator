@@ -1,9 +1,10 @@
 package com.appacoustic.android.dbcalculator.domain
 
-class AddFormatter {
+abstract class OperatorFormatter(private val separator: Separator) {
 
-    companion object {
-        const val PLUS_SEPARATOR = " + "
+    enum class Separator(val value: String) {
+        PLUS(" + "),
+        MINUS(" - ")
     }
 
     operator fun invoke(input: String): String {
@@ -12,21 +13,25 @@ class AddFormatter {
         val currentNumber = currentNumber(input)
         val restOfTheInput = input.substring(0, input.length - currentNumber.length)
 
-        if (currentNumber == ".") return restOfTheInput + "0." + PLUS_SEPARATOR
+        val separator = separator.value
+        if (currentNumber == ".") return restOfTheInput + "0." + separator
         if (currentNumber.isNotBlank()) {
             return if (currentNumber.last().toString() != ".") {
-                input + PLUS_SEPARATOR
+                input + separator
             } else {
-                restOfTheInput + currentNumber.substring(0, currentNumber.length - 1) + PLUS_SEPARATOR
+                restOfTheInput + currentNumber.substring(0, currentNumber.length - 1) + separator
             }
         }
 
         if (restOfTheInput.isNotBlank() && restOfTheInput.last().toString() == " ") return input
 
-        return input + PLUS_SEPARATOR
+        return input + separator
     }
 
     private fun currentNumber(input: String): String {
         return input.substringAfterLast(" ")
     }
 }
+
+class AddFormatter : OperatorFormatter(Separator.PLUS)
+class MinusFormatter : OperatorFormatter(Separator.MINUS)

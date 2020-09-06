@@ -18,11 +18,12 @@
     </style>
 
     <style name="Button">
-        <item name="android:background">@color/accent</item>
+        <item name="android:background">@drawable/bg_button_ripple</item>
         <item name="android:textColor">@color/background</item>
+        <item name="android:textSize">20sp</item>
     </style>
 
     <style name="ImageButton">
-        <item name="android:background">@color/accent</item>
+        <item name="android:background">@drawable/bg_button_ripple</item>
     </style>
 </resources>

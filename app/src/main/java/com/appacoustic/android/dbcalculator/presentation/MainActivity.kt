@@ -29,7 +29,11 @@ class MainActivity : AppCompatActivity() {
         })
 
         viewModel.input.observe(this, { input ->
-            tvSources.text = input
+            if (input.isBlank()) {
+                tvSources.text = "?"
+            } else {
+                tvSources.text = input
+            }
         })
     }
 
@@ -57,8 +61,14 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initOperationButtons() {
+        btnClear.setOnClickListener {
+            viewModel.handleClearClicked()
+        }
         ibBackspace.setOnClickListener {
             viewModel.handleBackspaceClicked()
+        }
+        ibMinus.setOnClickListener {
+            viewModel.handleMinusClicked()
         }
         ibAdd.setOnClickListener {
             viewModel.handleAddClicked()
