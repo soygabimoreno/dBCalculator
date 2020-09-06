@@ -44,7 +44,7 @@ class MainViewModel(
 
     fun handleCommaClicked() {
         val input = _input.value!!
-        _input.value = commaFormatter("$input.")
+        _input.value = commaFormatter(input)
     }
 
     fun handleBackspaceClicked() {
