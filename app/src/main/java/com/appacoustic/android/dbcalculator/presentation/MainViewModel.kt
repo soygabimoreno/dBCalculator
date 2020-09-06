@@ -10,7 +10,8 @@ class MainViewModel(
     val inputFormatter: InputFormatter,
     val commaFormatter: CommaFormatter,
     val addFormatter: AddFormatter,
-    val minusFormatter: MinusFormatter
+    val minusFormatter: MinusFormatter,
+    val backspaceFormatter: BackspaceFormatter
 ) : ViewModel() {
 
     private var _sum = MutableLiveData<Float>()
@@ -48,10 +49,7 @@ class MainViewModel(
 
     fun handleBackspaceClicked() {
         val input = _input.value!!
-        val length = input.length
-        if (length > 0) {
-            _input.value = input.substring(0, length - 1)
-        }
+        _input.value = backspaceFormatter(input)
     }
 
     fun handleMinusClicked() {

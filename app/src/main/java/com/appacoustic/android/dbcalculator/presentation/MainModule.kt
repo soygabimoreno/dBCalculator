@@ -11,6 +11,7 @@ val mainModule = module {
     single { CommaFormatter() }
     single { AddFormatter() }
     single { MinusFormatter() }
+    single { BackspaceFormatter() }
     scope(named<MainActivity>()) {
         viewModel {
             MainViewModel(
@@ -18,7 +19,8 @@ val mainModule = module {
                 inputFormatter = get(),
                 commaFormatter = get(),
                 addFormatter = get(),
-                minusFormatter = get()
+                minusFormatter = get(),
+                backspaceFormatter = get()
             )
         }
     }
