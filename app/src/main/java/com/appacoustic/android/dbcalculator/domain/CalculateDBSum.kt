@@ -6,17 +6,12 @@ import kotlin.math.log10
 import kotlin.math.pow
 import kotlin.math.round
 
-class CalculateDBSum(
-    val commaRemover: CommaRemover
-) {
-
-    object InputNotFilledException : Exception("InputNotFilledException")
+class CalculateDBSum {
 
     operator fun invoke(input: String): Either<Throwable, Float> {
         return if (input.isFilled()) {
-            val inputFormatted = commaRemover(input)
-            if (inputFormatted.isFilled()) {
-                val sources = inputFormatted.toSources()
+            if (input.isFilled()) {
+                val sources = input.toSources()
                 var linearSum = 0.0
                 sources.forEach { source ->
                     linearSum += 10.0.pow(source / 10)
@@ -33,6 +28,6 @@ class CalculateDBSum(
     }
 
     private fun String.toSources(): List<Double> =
-        split(CommaRemover.DELIMITER)
+        split(InputFormatter.DELIMITER)
             .map { it.toDouble() }
 }

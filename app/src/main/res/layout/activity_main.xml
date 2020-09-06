@@ -50,12 +50,13 @@
         android:layout_marginTop="16dp"
         android:background="@drawable/bg_rounded"
         android:padding="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/clButtons"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/clAttenuation">
 
         <TextView
-            android:id="@+id/tvSources"
+            android:id="@+id/tvSourcesLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@null"
@@ -65,29 +66,210 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
 
-        <EditText
-            android:id="@+id/etSources"
+        <TextView
+            android:id="@+id/tvSources"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:backgroundTint="@color/accent"
-            android:hint="@string/sources_hint"
-            android:inputType="numberDecimal"
+            android:background="@null"
+            android:text="Foo"
             android:textAppearance="?android:textAppearanceMedium"
-            android:textColor="@color/accent"
-            android:textColorHint="@color/accent_alpha_30"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvSources"/>
+            app:layout_constraintTop_toBottomOf="@+id/tvSourcesLabel"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fabAdd"
-        android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clButtons"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:src="@drawable/ic_baseline_add_24"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/clSources"/>
+        app:layout_constraintStart_toStartOf="parent">
+
+        <LinearLayout
+            android:id="@+id/ll1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <Button
+                android:id="@+id/btn1"
+                style="@style/Button"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_weight="1"
+                android:text="1"
+                tools:ignore="HardcodedText"/>
+
+            <Button
+                android:id="@+id/btn2"
+                style="@style/Button"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_weight="1"
+                android:text="2"
+                tools:ignore="HardcodedText"/>
+
+            <Button
+                android:id="@+id/btn3"
+                style="@style/Button"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_weight="1"
+                android:text="3"
+                tools:ignore="HardcodedText"/>
+
+            <Button
+                android:id="@+id/btnFoo"
+                style="@style/Button"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_weight="1"
+                android:visibility="invisible"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ll1">
+
+            <Button
+                android:id="@+id/btn4"
+                style="@style/Button"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_weight="1"
+                android:text="4"
+                tools:ignore="HardcodedText"/>
+
+            <Button
+                android:id="@+id/btn5"
+                style="@style/Button"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_weight="1"
+                android:text="5"
+                tools:ignore="HardcodedText"/>
+
+            <Button
+                android:id="@+id/btn6"
+                style="@style/Button"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_weight="1"
+                android:text="6"
+                tools:ignore="HardcodedText"/>
+
+            <Button
+                android:id="@+id/btnClear"
+                style="@style/Button"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_margin="8dp"
+                android:layout_weight="1"
+                android:background="@color/sizzlingRed"
+                android:src="@drawable/ic_baseline_keyboard_backspace_24"
+                android:text="@string/clear"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ll2">
+
+            <Button
+                android:id="@+id/btn7"
+                style="@style/Button"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_weight="1"
+                android:text="7"
+                tools:ignore="HardcodedText"/>
+
+            <Button
+                android:id="@+id/btn8"
+                style="@style/Button"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_weight="1"
+                android:text="8"
+                tools:ignore="HardcodedText"/>
+
+            <Button
+                android:id="@+id/btn9"
+                style="@style/Button"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_weight="1"
+                android:text="9"
+                tools:ignore="HardcodedText"/>
+
+            <ImageButton
+                android:id="@+id/ibBackspace"
+                style="@style/ImageButton"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_margin="8dp"
+                android:layout_weight="1"
+                android:background="@color/grayMedium"
+                android:src="@drawable/ic_baseline_keyboard_backspace_24"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ll3">
+
+            <Button
+                android:id="@+id/btnFoo2"
+                style="@style/Button"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_weight="1"
+                android:visibility="invisible"/>
+
+            <Button
+                android:id="@+id/btn0"
+                style="@style/Button"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_weight="1"
+                android:text="0"
+                tools:ignore="HardcodedText"/>
+
+            <Button
+                android:id="@+id/btnComma"
+                style="@style/Button"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_weight="1"
+                android:text="."
+                tools:ignore="HardcodedText"/>
+
+            <ImageButton
+                android:id="@+id/ibAdd"
+                style="@style/ImageButton"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_margin="8dp"
+                android:layout_weight="1"
+                android:background="@color/grayMedium"
+                android:src="@drawable/ic_baseline_add_24"/>
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

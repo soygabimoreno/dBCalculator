@@ -1,13 +1,10 @@
 package com.appacoustic.android.dbcalculator.presentation
 
-import android.content.Context
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
-import android.view.inputmethod.InputMethodManager
+import android.view.View
+import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import com.appacoustic.android.dbcalculator.R
-import com.appacoustic.android.dbcalculator.framework.setOnTextChangedListener
 import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.androidx.viewmodel.scope.viewModel
 import org.koin.androidx.scope.lifecycleScope as koinScope
@@ -21,7 +18,9 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         initViewModel()
         initEditText()
-        initFab()
+        initNumberButtons()
+        initCommaButton()
+        initOperationButtons()
     }
 
     private fun initViewModel() {
@@ -30,30 +29,40 @@ class MainActivity : AppCompatActivity() {
         })
 
         viewModel.input.observe(this, { input ->
-            etSources.setText(input)
-        })
-
-        viewModel.inputIndex.observe(this, { index ->
-            etSources.setSelection(index)
+            tvSources.text = input
         })
     }
 
     private fun initEditText() {
-        Handler(Looper.getMainLooper()).postDelayed({
-            etSources.requestFocus()
-            val imr = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-            imr.showSoftInput(etSources, InputMethodManager.SHOW_IMPLICIT)
-        }, 500)
+//        viewModel.handleSourcesChanged(input.toString())
+    }
 
-        etSources.setOnTextChangedListener { input ->
-            viewModel.handleSourcesChanged(input.toString())
+    private fun initNumberButtons() {
+        btn1.setOnClickListener(::handleNumberClicked)
+        btn2.setOnClickListener(::handleNumberClicked)
+        btn3.setOnClickListener(::handleNumberClicked)
+        btn4.setOnClickListener(::handleNumberClicked)
+        btn5.setOnClickListener(::handleNumberClicked)
+        btn6.setOnClickListener(::handleNumberClicked)
+        btn7.setOnClickListener(::handleNumberClicked)
+        btn8.setOnClickListener(::handleNumberClicked)
+        btn9.setOnClickListener(::handleNumberClicked)
+        btn0.setOnClickListener(::handleNumberClicked)
+    }
+
+    private fun initCommaButton() {
+        btnComma.setOnClickListener {
+            viewModel.handleCommaClicked()
         }
     }
 
-    private fun initFab() {
-        fabAdd.setOnClickListener {
-            val input = etSources.text.toString()
-            viewModel.handlePlusClicked(input)
+    private fun initOperationButtons() {
+        ibBackspace.setOnClickListener {
+            viewModel.handleBackspaceClicked()
         }
+    }
+
+    private fun handleNumberClicked(view: View) {
+        viewModel.handleNumberClicked((view as Button).text.toString())
     }
 }

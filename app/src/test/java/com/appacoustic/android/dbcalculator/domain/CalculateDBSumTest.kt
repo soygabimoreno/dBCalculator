@@ -7,12 +7,12 @@ import org.junit.Test
 
 class CalculateDBSumTest {
 
-    private val commaRemover = CommaRemover()
+    private val commaRemover = InputFormatter()
     private lateinit var calculateDBSum: CalculateDBSum
 
     @Before
     fun setUp() {
-        calculateDBSum = CalculateDBSum(commaRemover)
+        calculateDBSum = CalculateDBSum()
     }
 
     @Test

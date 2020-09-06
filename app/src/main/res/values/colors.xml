@@ -6,6 +6,7 @@
     <color name="primaryDark_darkened_1">#573F78</color>
     <color name="primaryDark_darkened_2">#3F2D57</color>
     <color name="primaryDark_darkened_3">#2A1F3B</color>
+    <color name="background">#2A1F3B</color>
     <color name="sunglow">#ffca3a</color>
     <color name="sizzlingRed">#ff595e</color>
     <color name="grayLight">#CCCCCC</color>
