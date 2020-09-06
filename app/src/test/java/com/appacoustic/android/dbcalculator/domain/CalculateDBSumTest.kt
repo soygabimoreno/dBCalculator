@@ -16,17 +16,12 @@ class CalculateDBSumTest {
 
     @Test
     fun `if input is a well-formed sum, then returns the correct value`() {
-        assertCalculation(6f, "3 + 3")
+        assertCalculation(1.5f, "3 - 2 + 0")
     }
 
     @Test
     fun `if input ends with the plus with spaces delimiter, then returns the correct value`() {
         assertCalculation(6f, "3 + 3 + ")
-    }
-
-    @Test
-    fun `if input has an uncompleted decimal number, then returns the correct value`() {
-        assertCalculation(7f, "3 + 3 + 0")
     }
 
     private fun assertCalculation(expectedResult: Float, input: String) =

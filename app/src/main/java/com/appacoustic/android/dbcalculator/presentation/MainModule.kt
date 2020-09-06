@@ -6,21 +6,19 @@ import org.koin.core.qualifier.named
 import org.koin.dsl.module
 
 val mainModule = module {
-    single { InputFormatter() }
-    single { CalculateDBSum() }
-    single { CommaFormatter() }
     single { AddFormatter() }
     single { MinusFormatter() }
+    single { CommaFormatter() }
     single { BackspaceFormatter() }
+    single { CalculateDBSum() }
     scope(named<MainActivity>()) {
         viewModel {
             MainViewModel(
-                calculateDBSum = get(),
-                inputFormatter = get(),
-                commaFormatter = get(),
                 addFormatter = get(),
                 minusFormatter = get(),
-                backspaceFormatter = get()
+                commaFormatter = get(),
+                backspaceFormatter = get(),
+                calculateDBSum = get()
             )
         }
     }

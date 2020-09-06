@@ -6,12 +6,11 @@ import androidx.lifecycle.ViewModel
 import com.appacoustic.android.dbcalculator.domain.*
 
 class MainViewModel(
-    private val calculateDBSum: CalculateDBSum,
-    val inputFormatter: InputFormatter,
-    val commaFormatter: CommaFormatter,
     val addFormatter: AddFormatter,
     val minusFormatter: MinusFormatter,
-    val backspaceFormatter: BackspaceFormatter
+    val backspaceFormatter: BackspaceFormatter,
+    val commaFormatter: CommaFormatter,
+    private val calculateDBSum: CalculateDBSum
 ) : ViewModel() {
 
     private var _sum = MutableLiveData<Float>()

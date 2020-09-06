@@ -14,7 +14,6 @@ class MainViewModelTest {
     val instantTaskExecutorRule = InstantTaskExecutorRule()
 
     private val calculateDBSum = mockk<CalculateDBSum>()
-    private val inputFormatter = mockk<InputFormatter>()
     private val commaFormatter = mockk<CommaFormatter>()
     private val addFormatter = mockk<AddFormatter>()
     private val minusFormatter = mockk<MinusFormatter>()
@@ -25,12 +24,11 @@ class MainViewModelTest {
     @Before
     fun setUp() {
         viewModel = MainViewModel(
-            calculateDBSum = calculateDBSum,
-            inputFormatter = inputFormatter,
-            commaFormatter = commaFormatter,
             addFormatter = addFormatter,
             minusFormatter = minusFormatter,
-            backspaceFormatter = backspaceFormatter
+            backspaceFormatter = backspaceFormatter,
+            commaFormatter = commaFormatter,
+            calculateDBSum = calculateDBSum
         )
     }
 

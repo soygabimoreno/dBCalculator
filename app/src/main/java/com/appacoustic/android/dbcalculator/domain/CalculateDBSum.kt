@@ -17,9 +17,18 @@ class CalculateDBSum {
             }
 
             val sources = inputFormatted.toSources()
+            val signs = inputFormatted.toSigns()
             var linearSum = 0.0
-            sources.forEach { source ->
-                linearSum += 10.0.pow(source / 10)
+            sources.forEachIndexed { index, source ->
+                if (index > 0) {
+                    if (signs[index - 1].toString() == "+") {
+                        linearSum += 10.0.pow(source / 10)
+                    } else {
+                        linearSum -= 10.0.pow(source / 10)
+                    }
+                } else {
+                    linearSum += 10.0.pow(source / 10)
+                }
             }
             val rawSum = 10 * log10(linearSum)
             val formattedSum = (round(rawSum * 10) / 10).toFloat()
@@ -34,4 +43,8 @@ class CalculateDBSum {
             OperatorFormatter.Separator.PLUS.value,
             OperatorFormatter.Separator.MINUS.value
         ).map { it.toDouble() }
+
+    private fun String.toSigns(): String =
+        replace(" ", "").replace("[0-9]".toRegex(), "")
 }
+
