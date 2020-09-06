@@ -60,6 +60,9 @@ class MainActivity : AppCompatActivity() {
         ibBackspace.setOnClickListener {
             viewModel.handleBackspaceClicked()
         }
+        ibAdd.setOnClickListener {
+            viewModel.handleAddClicked()
+        }
     }
 
     private fun handleNumberClicked(view: View) {

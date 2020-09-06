@@ -1,5 +1,6 @@
 package com.appacoustic.android.dbcalculator.presentation
 
+import com.appacoustic.android.dbcalculator.domain.AddFormatter
 import com.appacoustic.android.dbcalculator.domain.CalculateDBSum
 import com.appacoustic.android.dbcalculator.domain.CommaFormatter
 import com.appacoustic.android.dbcalculator.domain.InputFormatter
@@ -11,12 +12,14 @@ val mainModule = module {
     single { InputFormatter() }
     single { CalculateDBSum() }
     single { CommaFormatter() }
+    single { AddFormatter() }
     scope(named<MainActivity>()) {
         viewModel {
             MainViewModel(
                 calculateDBSum = get(),
                 inputFormatter = get(),
-                commaFormatter = get()
+                commaFormatter = get(),
+                addFormatter = get()
             )
         }
     }

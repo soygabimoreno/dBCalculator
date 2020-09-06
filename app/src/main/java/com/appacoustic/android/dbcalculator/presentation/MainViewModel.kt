@@ -3,6 +3,7 @@ package com.appacoustic.android.dbcalculator.presentation
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.appacoustic.android.dbcalculator.domain.AddFormatter
 import com.appacoustic.android.dbcalculator.domain.CalculateDBSum
 import com.appacoustic.android.dbcalculator.domain.CommaFormatter
 import com.appacoustic.android.dbcalculator.domain.InputFormatter
@@ -10,7 +11,8 @@ import com.appacoustic.android.dbcalculator.domain.InputFormatter
 class MainViewModel(
     private val calculateDBSum: CalculateDBSum,
     val inputFormatter: InputFormatter,
-    val commaFormatter: CommaFormatter
+    val commaFormatter: CommaFormatter,
+    val addFormatter: AddFormatter
 ) : ViewModel() {
 
     private var _sum = MutableLiveData<Float>()
@@ -53,9 +55,9 @@ class MainViewModel(
         }
     }
 
-    fun handlePlusClicked(input: String) {
-        val inputFormatted = inputFormatter(input)
-        _input.value = inputFormatted
+    fun handleAddClicked() {
+        val input = _input.value!!
+        _input.value = addFormatter(input)
     }
 
     private fun ensureASingleComma(input: String): String =

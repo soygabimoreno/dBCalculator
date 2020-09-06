@@ -1,6 +1,7 @@
 package com.appacoustic.android.dbcalculator.presentation
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import com.appacoustic.android.dbcalculator.domain.AddFormatter
 import com.appacoustic.android.dbcalculator.domain.CalculateDBSum
 import com.appacoustic.android.dbcalculator.domain.CommaFormatter
 import com.appacoustic.android.dbcalculator.domain.InputFormatter
@@ -18,6 +19,7 @@ class MainViewModelTest {
     private val calculateDBSum = mockk<CalculateDBSum>()
     private val inputFormatter = mockk<InputFormatter>()
     private val commaFormatter = mockk<CommaFormatter>()
+    private val addFormatter = mockk<AddFormatter>()
     private lateinit var viewModel: MainViewModel
 
     @Before
@@ -25,7 +27,8 @@ class MainViewModelTest {
         viewModel = MainViewModel(
             calculateDBSum = calculateDBSum,
             inputFormatter = inputFormatter,
-            commaFormatter = commaFormatter
+            commaFormatter = commaFormatter,
+            addFormatter = addFormatter
         )
     }
 
@@ -33,7 +36,7 @@ class MainViewModelTest {
     fun `when the user clicks on plus and the input text is empty, then the input value value remains equal`() {
         val initValue = viewModel.input.value
 
-        viewModel.handlePlusClicked("")
+        viewModel.handleAddClicked()
 
         val endValue = viewModel.input.value
         assertTrue(initValue == endValue)
@@ -43,7 +46,7 @@ class MainViewModelTest {
     fun `when the user clicks on plus and the input text ends by a plus, then the input value remains equal`() {
         val initValue = viewModel.input.value
 
-        viewModel.handlePlusClicked("2 +")
+        viewModel.handleAddClicked()
 
         val endValue = viewModel.input.value
         assertTrue(initValue == endValue)
@@ -53,7 +56,7 @@ class MainViewModelTest {
     fun `when the user clicks on plus and the input text ends by a plus and space, then the input value remains equal`() {
         val initValue = viewModel.input.value
 
-        viewModel.handlePlusClicked("2 + ")
+        viewModel.handleAddClicked()
 
         val endValue = viewModel.input.value
         assertTrue(initValue == endValue)
@@ -61,7 +64,7 @@ class MainViewModelTest {
 
     @Test
     fun `when the user clicks on plus and the input text ends by a number, then the input adds a plus with spaces`() {
-        viewModel.handlePlusClicked("2")
+        viewModel.handleAddClicked()
 
         val endValue = viewModel.input.value
         assertTrue("2 + " == endValue)
