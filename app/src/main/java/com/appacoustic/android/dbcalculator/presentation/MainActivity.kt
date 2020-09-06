@@ -29,6 +29,7 @@ class MainActivity : AppCompatActivity() {
         })
 
         viewModel.input.observe(this, { input ->
+            viewModel.calculateSum(input)
             if (input.isBlank()) {
                 tvSources.text = "?"
             } else {

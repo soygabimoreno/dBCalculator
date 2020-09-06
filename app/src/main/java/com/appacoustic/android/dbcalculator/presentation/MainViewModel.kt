@@ -25,15 +25,6 @@ class MainViewModel(
         _input.value = ""
     }
 
-    fun handleSourcesChanged(input: String) {
-//        calculateDBSum(input)
-//            .fold({
-//                _sum.value = null
-//            }, { sum ->
-//                _sum.value = sum
-//            })
-    }
-
     fun handleNumberClicked(input: String) {
         _input.value = _input.value + input
     }
@@ -60,5 +51,14 @@ class MainViewModel(
     fun handleAddClicked() {
         val input = _input.value!!
         _input.value = addFormatter(input)
+    }
+
+    fun calculateSum(input: String) {
+        calculateDBSum(input)
+            .fold({
+                _sum.value = null
+            }, { sum ->
+                _sum.value = sum
+            })
     }
 }

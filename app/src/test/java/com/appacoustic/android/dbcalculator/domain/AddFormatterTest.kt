@@ -1,6 +1,5 @@
-package com.appacoustic.android.dbcalculator.domain.formatter
+package com.appacoustic.android.dbcalculator.domain
 
-import com.appacoustic.android.dbcalculator.domain.AddFormatter
 import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
