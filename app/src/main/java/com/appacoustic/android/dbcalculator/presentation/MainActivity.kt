@@ -1,10 +1,13 @@
 package com.appacoustic.android.dbcalculator.presentation
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import com.appacoustic.android.dbcalculator.R
+import com.appacoustic.android.dbcalculator.framework.event.EventObserver
 import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.androidx.viewmodel.scope.viewModel
 import org.koin.androidx.scope.lifecycleScope as koinScope
@@ -17,10 +20,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         initViewModel()
-        initEditText()
         initNumberButtons()
         initCommaButton()
         initOperationButtons()
+        initInfoButton()
     }
 
     private fun initViewModel() {
@@ -36,10 +39,10 @@ class MainActivity : AppCompatActivity() {
                 tvSources.text = input
             }
         })
-    }
-
-    private fun initEditText() {
-//        viewModel.handleSourcesChanged(input.toString())
+        viewModel.navigateToWeb.observe(this, EventObserver { uriString ->
+            val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(uriString))
+            startActivity(browserIntent)
+        })
     }
 
     private fun initNumberButtons() {
@@ -78,5 +81,11 @@ class MainActivity : AppCompatActivity() {
 
     private fun handleNumberClicked(view: View) {
         viewModel.handleNumberClicked((view as Button).text.toString())
+    }
+
+    private fun initInfoButton() {
+        ibInfo.setOnClickListener {
+            viewModel.handleInfoClicked()
+        }
     }
 }

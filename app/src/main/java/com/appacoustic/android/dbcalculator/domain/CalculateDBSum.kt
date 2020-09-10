@@ -20,14 +20,10 @@ class CalculateDBSum {
             val signs = inputFormatted.toSigns()
             var linearSum = 0.0
             sources.forEachIndexed { index, source ->
-                if (index > 0) {
-                    if (signs[index - 1].toString() == "+") {
-                        linearSum += 10.0.pow(source / 10)
-                    } else {
-                        linearSum -= 10.0.pow(source / 10)
-                    }
-                } else {
+                if (signs[index].toString() == "+") {
                     linearSum += 10.0.pow(source / 10)
+                } else {
+                    linearSum -= 10.0.pow(source / 10)
                 }
             }
             val rawSum = 10 * log10(linearSum)
@@ -45,6 +41,6 @@ class CalculateDBSum {
         ).map { it.toDouble() }
 
     private fun String.toSigns(): String =
-        replace(" ", "").replace("[0-9]".toRegex(), "")
+        "+" + replace(" ", "").replace("[0-9]".toRegex(), "")
 }
 

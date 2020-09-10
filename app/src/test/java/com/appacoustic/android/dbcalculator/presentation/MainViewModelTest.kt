@@ -69,4 +69,13 @@ class MainViewModelTest {
         val endValue = viewModel.input.value
         assertTrue("2 + " == endValue)
     }
+
+    @Test
+    fun `when the user clicks on info, then navigate to the corresponding url`() {
+        val initValue = viewModel.navigateToWeb.value
+        viewModel.handleInfoClicked()
+
+        val endValue = viewModel.navigateToWeb.value
+        assertTrue(initValue != endValue)
+    }
 }

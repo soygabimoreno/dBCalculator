@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.appacoustic.android.dbcalculator.domain.*
+import com.appacoustic.android.dbcalculator.framework.event.Event
 
 class MainViewModel(
     val addFormatter: AddFormatter,
@@ -18,6 +19,9 @@ class MainViewModel(
 
     private var _input = MutableLiveData<String>()
     val input: LiveData<String> = _input
+
+    private val _navigateToWeb = MutableLiveData<Event<String>>()
+    val navigateToWeb: LiveData<Event<String>> = _navigateToWeb
 
     init {
         _sum.value = null
@@ -59,5 +63,9 @@ class MainViewModel(
             }, { sum ->
                 _sum.value = sum
             })
+    }
+
+    fun handleInfoClicked() {
+        _navigateToWeb.value = Event("http://appacoustic.com")
     }
 }
