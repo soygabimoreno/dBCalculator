@@ -2,6 +2,7 @@ package com.appacoustic.android.dbcalculator.presentation
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.appacoustic.android.dbcalculator.domain.*
+import io.mockk.every
 import io.mockk.mockk
 import org.junit.Assert.assertTrue
 import org.junit.Before
@@ -15,7 +16,7 @@ class MainViewModelTest {
 
     private val calculateDBSum = mockk<CalculateDBSum>()
     private val commaFormatter = mockk<CommaFormatter>()
-    private val addFormatter = mockk<AddFormatter>()
+    private val addFormatter = mockk<AddFormatter>(relaxed = true)
     private val minusFormatter = mockk<MinusFormatter>()
     private val backspaceFormatter = mockk<BackspaceFormatter>()
 
@@ -64,6 +65,9 @@ class MainViewModelTest {
 
     @Test
     fun `when the user clicks on plus and the input text ends by a number, then the input adds a plus with spaces`() {
+        every { addFormatter("2") } returns "2 + "
+
+        viewModel.handleNumberClicked("2")
         viewModel.handleAddClicked()
 
         val endValue = viewModel.input.value
