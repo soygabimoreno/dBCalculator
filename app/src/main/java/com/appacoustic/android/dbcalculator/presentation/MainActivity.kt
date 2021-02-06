@@ -5,15 +5,14 @@ import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
-import androidx.appcompat.app.AppCompatActivity
 import com.appacoustic.android.dbcalculator.databinding.ActivityMainBinding
 import com.appacoustic.android.dbcalculator.framework.event.EventObserver
-import org.koin.androidx.viewmodel.scope.viewModel
-import org.koin.androidx.scope.lifecycleScope as koinScope
+import org.koin.androidx.scope.ScopeActivity
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : ScopeActivity() {
 
-    private val viewModel: MainViewModel by koinScope.viewModel(this)
+    private val viewModel: MainViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
