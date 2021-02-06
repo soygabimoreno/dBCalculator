@@ -6,9 +6,8 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
-import com.appacoustic.android.dbcalculator.R
+import com.appacoustic.android.dbcalculator.databinding.ActivityMainBinding
 import com.appacoustic.android.dbcalculator.framework.event.EventObserver
-import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.androidx.viewmodel.scope.viewModel
 import org.koin.androidx.scope.lifecycleScope as koinScope
 
@@ -18,74 +17,84 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        initViewModel()
-        initNumberButtons()
-        initCommaButton()
-        initOperationButtons()
-        initInfoButton()
+        val binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        initViewModel(binding)
+        initNumberButtons(binding)
+        initCommaButton(binding)
+        initOperationButtons(binding)
+        initInfoButton(binding)
     }
 
-    private fun initViewModel() {
-        viewModel.sum.observe(this, { sum ->
-            tvSumResult.text = sum?.toString() ?: "?"
-        })
+    private fun initViewModel(binding: ActivityMainBinding) {
+        viewModel.sum.observe(
+            this,
+            { sum ->
+                binding.tvSumResult.text = sum?.toString() ?: "?"
+            })
 
-        viewModel.input.observe(this, { input ->
-            viewModel.calculateSum(input)
-            if (input.isBlank()) {
-                tvSources.text = "?"
-            } else {
-                tvSources.text = input
-            }
-        })
-        viewModel.navigateToWeb.observe(this, EventObserver { uriString ->
-            val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(uriString))
-            startActivity(browserIntent)
-        })
+        viewModel.input.observe(
+            this,
+            { input ->
+                viewModel.calculateSum(input)
+                if (input.isBlank()) {
+                    binding.tvSources.text = "?"
+                } else {
+                    binding.tvSources.text = input
+                }
+            })
+        viewModel.navigateToWeb.observe(
+            this,
+            EventObserver { uriString ->
+                val browserIntent = Intent(
+                    Intent.ACTION_VIEW,
+                    Uri.parse(uriString)
+                )
+                startActivity(browserIntent)
+            })
     }
 
-    private fun initNumberButtons() {
-        btn1.setOnClickListener(::handleNumberClicked)
-        btn2.setOnClickListener(::handleNumberClicked)
-        btn3.setOnClickListener(::handleNumberClicked)
-        btn4.setOnClickListener(::handleNumberClicked)
-        btn5.setOnClickListener(::handleNumberClicked)
-        btn6.setOnClickListener(::handleNumberClicked)
-        btn7.setOnClickListener(::handleNumberClicked)
-        btn8.setOnClickListener(::handleNumberClicked)
-        btn9.setOnClickListener(::handleNumberClicked)
-        btn0.setOnClickListener(::handleNumberClicked)
+    private fun initNumberButtons(binding: ActivityMainBinding) {
+        binding.btn1.setOnClickListener(::handleNumberClicked)
+        binding.btn2.setOnClickListener(::handleNumberClicked)
+        binding.btn3.setOnClickListener(::handleNumberClicked)
+        binding.btn4.setOnClickListener(::handleNumberClicked)
+        binding.btn5.setOnClickListener(::handleNumberClicked)
+        binding.btn6.setOnClickListener(::handleNumberClicked)
+        binding.btn7.setOnClickListener(::handleNumberClicked)
+        binding.btn8.setOnClickListener(::handleNumberClicked)
+        binding.btn9.setOnClickListener(::handleNumberClicked)
+        binding.btn0.setOnClickListener(::handleNumberClicked)
     }
 
-    private fun initCommaButton() {
-        btnComma.setOnClickListener {
+    private fun initCommaButton(binding: ActivityMainBinding) {
+        binding.btnComma.setOnClickListener {
             viewModel.handleCommaClicked()
         }
     }
 
-    private fun initOperationButtons() {
-        btnClear.setOnClickListener {
+    private fun initOperationButtons(binding: ActivityMainBinding) {
+        binding.btnClear.setOnClickListener {
             viewModel.handleClearClicked()
         }
-        ibBackspace.setOnClickListener {
+        binding.ibBackspace.setOnClickListener {
             viewModel.handleBackspaceClicked()
         }
-        ibMinus.setOnClickListener {
+        binding.ibMinus.setOnClickListener {
             viewModel.handleMinusClicked()
         }
-        ibAdd.setOnClickListener {
+        binding.ibAdd.setOnClickListener {
             viewModel.handleAddClicked()
+        }
+    }
+
+    private fun initInfoButton(binding: ActivityMainBinding) {
+        binding.ibInfo.setOnClickListener {
+            viewModel.handleInfoClicked()
         }
     }
 
     private fun handleNumberClicked(view: View) {
         viewModel.handleNumberClicked((view as Button).text.toString())
-    }
-
-    private fun initInfoButton() {
-        ibInfo.setOnClickListener {
-            viewModel.handleInfoClicked()
-        }
     }
 }
