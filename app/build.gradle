@@ -2,6 +2,7 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id 'kotlin-kapt'
+    id 'com.google.gms.google-services'
     id 'com.google.firebase.crashlytics'
 }
 
@@ -88,5 +89,3 @@ dependencies {
 tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
     kotlinOptions.freeCompilerArgs += ["-Xopt-in=kotlin.RequiresOptIn"]
 }
-
-apply plugin: 'com.google.gms.google-services'
