@@ -1,6 +1,8 @@
 package com.appacoustic.android.dbcalculator.domain
 
 import arrow.core.Either
+import arrow.core.left
+import arrow.core.right
 import com.appacoustic.android.dbcalculator.framework.isFilled
 import kotlin.math.log10
 import kotlin.math.pow
@@ -28,9 +30,9 @@ class CalculateDBSum {
             }
             val rawSum = 10 * log10(linearSum)
             val formattedSum = (round(rawSum * 10) / 10).toFloat()
-            Either.right(formattedSum)
+            formattedSum.right()
         } else {
-            Either.left(InputNotFilledException)
+            InputNotFilledException.left()
         }
     }
 
