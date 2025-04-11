@@ -5,6 +5,10 @@ import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
+import androidx.activity.enableEdgeToEdge
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.updatePadding
 import com.appacoustic.android.dbcalculator.databinding.ActivityMainBinding
 import com.appacoustic.android.dbcalculator.framework.event.EventObserver
 import org.koin.androidx.scope.ScopeActivity
@@ -16,8 +20,15 @@ class MainActivity : ScopeActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
         val binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        ViewCompat.setOnApplyWindowInsetsListener(binding.root) { _, insets ->
+            binding.root.updatePadding(
+                top = insets.getInsets(WindowInsetsCompat.Type.systemBars()).top
+            )
+            insets
+        }
         initViewModel(binding)
         initNumberButtons(binding)
         initCommaButton(binding)
