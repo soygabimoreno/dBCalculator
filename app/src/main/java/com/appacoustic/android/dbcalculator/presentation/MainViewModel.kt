@@ -14,8 +14,8 @@ class MainViewModel(
     private val calculateDBSum: CalculateDBSum
 ) : ViewModel() {
 
-    private var _sum = MutableLiveData<Float>()
-    val sum: LiveData<Float> = _sum
+    private var _sum = MutableLiveData<Float?>()
+    val sum: LiveData<Float?> = _sum
 
     private var _input = MutableLiveData<String>()
     val input: LiveData<String> = _input
@@ -29,7 +29,7 @@ class MainViewModel(
     }
 
     fun handleNumberClicked(input: String) {
-        _input.value = _input.value + input
+        _input.value += input
     }
 
     fun handleCommaClicked() {

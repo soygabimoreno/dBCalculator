@@ -4,4 +4,8 @@
     <string name="sources_hint">Enter the SPL in decibels…</string>
     <string name="sum_label">Sum [dB]</string>
     <string name="clear">CLEAR</string>
+    <string name="cd_minus_button">Minus button</string>
+    <string name="cd_info_button">Info button</string>
+    <string name="cd_add_button">Add button</string>
+    <string name="cd_back_button">Remove back button</string>
 </resources>
