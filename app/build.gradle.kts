@@ -1,5 +1,5 @@
-import java.util.Properties
 import java.io.FileInputStream
+import java.util.Properties
 
 plugins {
     alias(libs.plugins.kotlin.android)
@@ -32,8 +32,8 @@ android {
         applicationId = "com.appacoustic.android.dbcalculator"
         minSdk = 23
         targetSdk = 35
-        versionCode = 9
-        versionName = "2.1.3"
+        versionCode = 10
+        versionName = "3.0.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
